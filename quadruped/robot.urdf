@@ -1,0 +1,325 @@
+<?xml version="1.0"?>
+<robot name="quadruped">
+    <link name="base_link">
+        <visual>
+            <origin xyz="0.0049215742833825515401 0.008362597111257197291 -0.010279088801785209867" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/base.stl"/>
+            </geometry>
+            <material name="base_material">
+                <color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0049215742833825515401 0.008362597111257197291 -0.010279088801785209867" rpy="0 -0 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/base.stl"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0.0049215742833825558769 0.0083625971112572059646 -0.0062790888017852097835" rpy="0 0 0"/>
+            <mass value="0.63592948064454324353" />
+            <inertia ixx="0.0036873641970292555907" ixy="0" ixz="0" iyy="0.0032716287150428131035" iyz="0" izz="0.0069522096642785262757" />
+        </inertial>
+    </link>
+
+    <gazebo reference="base_link">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <link name="ball_caster">
+        <visual>
+            <origin xyz="0.0073660000000000001516 0 -0.0020955000000000001403" rpy="3.141592653589793116 -0 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/ball_caster.stl"/>
+            </geometry>
+            <material name="ball_caster_material">
+                <color rgba="1 1 1 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0073660000000000001516 0 -0.0020955000000000001403" rpy="3.141592653589793116 -0 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/ball_caster.stl"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0.0073655046575237647505 -1.9835572058669262912e-07 -0.0056150993913816008712" rpy="0 0 0"/>
+            <mass value="0.0049895160479999992043" />
+            <inertia ixx="1.2629713113281908865e-07" ixy="5.1435610177033308984e-12" ixz="4.4665511069697224788e-12" iyy="1.2096252512157598233e-07" iyz="2.1159407610626589839e-12" izz="1.3706971477299090287e-07" />
+        </inertial>
+    </link>
+
+    <gazebo reference="ball_caster">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+    <joint name="link_front_ball" type="fixed">
+        <origin xyz="-0.0028254257166174471388 -0.12663740288874275608 -0.010279088801785209867" rpy="0 -0 0" />
+        <parent link="base_link" />
+        <child link="ball_caster" />
+        <axis xyz="0 0 1"/>
+        <limit effort="1" velocity="20" />
+        <joint_properties friction="0.0"/>
+    </joint>
+
+    <link name="ball_caster_2">
+        <visual>
+            <origin xyz="0.0073660000000000001516 0 -0.0020955000000000018751" rpy="-3.141592653589793116 -9.6303393234718175389e-48 3.3529963350555967606e-48" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/ball_caster.stl"/>
+            </geometry>
+            <material name="ball_caster_material">
+                <color rgba="1 1 1 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0073660000000000001516 0 -0.0020955000000000018751" rpy="-3.141592653589793116 -9.6303393234718175389e-48 3.3529963350555967606e-48" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/ball_caster.stl"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0.0073655046575237647505 -1.9835572058669262912e-07 -0.005615099391381602606" rpy="0 0 0"/>
+            <mass value="0.0049895160479999992043" />
+            <inertia ixx="1.2629713113281908865e-07" ixy="5.1435610177033308984e-12" ixz="4.4665511069697224788e-12" iyy="1.2096252512157598233e-07" iyz="2.1159407610626589839e-12" izz="1.3706971477299090287e-07" />
+        </inertial>
+    </link>
+
+    <gazebo reference="ball_caster_2">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+    <joint name="link_back_ball" type="fixed">
+        <origin xyz="-0.0028254257166174540777 0.14336259711125715066 -0.010279088801785206397" rpy="-1.0408340855860799426e-16 5.9887421101386484724e-31 -1.9721522630525262292e-31" />
+        <parent link="base_link" />
+        <child link="ball_caster_2" />
+        <axis xyz="0 0 1"/>
+        <limit effort="1" velocity="20" />
+        <joint_properties friction="0.0"/>
+    </joint>
+
+    <link name="motor_bracket">
+        <visual>
+            <origin xyz="0.0010000000000006366643 -0.0081499999999992966959 -0.013500000000000003317" rpy="-1.570796326794896558 3.4914813388431353274e-15 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/motor_bracket.stl"/>
+            </geometry>
+            <material name="motor_bracket_material">
+                <color rgba="0.79607843137254896693 0.82352941176470584317 0.9372549019607843146 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0010000000000006366643 -0.0081499999999992966959 -0.013500000000000003317" rpy="-1.570796326794896558 3.4914813388431353274e-15 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/motor_bracket.stl"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="-4.0713796376121678955e-06 -0.012177121574431955947 -0.0047261629959588977168" rpy="0 0 0"/>
+            <mass value="0.0084630469105596156654" />
+            <inertia ixx="2.8927942991819264068e-06" ixy="6.375298195262483249e-10" ixz="-1.2458808671193488844e-10" iyy="7.9629434849240517525e-07" iyz="5.5267826027688886096e-07" izz="2.9001914023676721556e-06" />
+        </inertial>
+    </link>
+
+
+    <gazebo reference="motor_bracket">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <link name="dc_motor">
+        <visual>
+            <origin xyz="0 0.0085000000000099995567 -9.9920072216264088638e-15" rpy="-3.141592653589793116 -0 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/dc_motor.stl"/>
+            </geometry>
+            <material name="dc_motor_material">
+                <color rgba="0.49803921568627451677 0.49803921568627451677 0.49803921568627451677 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0.0085000000000099995567 -9.9920072216264088638e-15" rpy="-3.141592653589793116 -0 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/dc_motor.stl"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="1.1702285396423122316e-05 0.0084346555184144807182 -0.027179996226653398844" rpy="0 0 0"/>
+            <mass value="0.096000000000000015876" />
+            <inertia ixx="3.1172642216988409689e-05" ixy="2.0079069750654133337e-08" ixz="3.14783788434006057e-08" iyy="3.1065300521791501672e-05" iyz="-1.8154048411485934033e-07" izz="7.041773449468090525e-06" />
+        </inertial>
+    </link>
+
+
+    <gazebo reference="dc_motor">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <link name="wheel">
+        <visual>
+            <origin xyz="0 0 -0.0025000000000000022204" rpy="-1.570796326794896558 -1.570796326794896558 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/wheel.stl"/>
+            </geometry>
+            <material name="wheel_material">
+                <color rgba="0.50196078431372548323 0.50196078431372548323 0.50196078431372548323 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 -0.0025000000000000022204" rpy="-1.570796326794896558 -1.570796326794896558 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/wheel.stl"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="7.9659079677550884038e-07 3.0513857657930534157e-08 -0.0025284034607947771488" rpy="0 0 0"/>
+            <mass value="0.014968548144000006286" />
+            <inertia ixx="8.6077439441117218819e-06" ixy="-2.3149305744539501693e-12" ixz="1.0674848956511458848e-11" iyy="8.6048259472699091337e-06" iyz="-1.1376260598377232569e-12" izz="1.7005905067567770369e-05" />
+        </inertial>
+    </link>
+
+
+    <gazebo reference="wheel">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <joint name="right_wheel" type="continuous">
+        <origin xyz="0 0.008500000000009997822 0.015000000000000013323" rpy="0 7.5763496404711474724e-35 -1.570796326794896558" />
+        <parent link="dc_motor" />
+        <child link="wheel" />
+        <axis xyz="0 0 1"/>
+        <limit effort="1" velocity="20" />
+        <joint_properties friction="0.0"/>
+    </joint>
+
+    <joint name="link_right_motor" type="fixed">
+        <origin xyz="-1.2143064331837649661e-17 0.0043499999999999927613 -0.022999999999999999611" rpy="1.570796326794896558 -3.4914813388431353274e-15 3.1415926535897895633" />
+        <parent link="motor_bracket" />
+        <child link="dc_motor" />
+        <axis xyz="0 0 1"/>
+        <limit effort="1" velocity="20" />
+        <joint_properties friction="0.0"/>
+    </joint>
+
+    <joint name="link_right_bracket" type="fixed">
+        <origin xyz="-0.12367842571661746831 0.0083625971112572007604 -0.0022790888017852097003" rpy="3.141592653589793116 5.1885812976927455838e-73 -1.570796326794896558" />
+        <parent link="base_link" />
+        <child link="motor_bracket" />
+        <axis xyz="0 0 1"/>
+        <limit effort="1" velocity="20" />
+        <joint_properties friction="0.0"/>
+    </joint>
+
+    <link name="motor_bracket_2">
+        <visual>
+            <origin xyz="0.0010000000000006375317 -0.0081499999999992966959 -0.013500000000000003317" rpy="-1.570796326794896558 3.4914813388431353274e-15 6.6217083938053274108e-105" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/motor_bracket.stl"/>
+            </geometry>
+            <material name="motor_bracket_material">
+                <color rgba="0.79607843137254896693 0.82352941176470584317 0.9372549019607843146 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0010000000000006375317 -0.0081499999999992966959 -0.013500000000000003317" rpy="-1.570796326794896558 3.4914813388431353274e-15 6.6217083938053274108e-105" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/motor_bracket.stl"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="-4.0713796376113005338e-06 -0.012177121574431955947 -0.0047261629959588977168" rpy="0 0 0"/>
+            <mass value="0.0084630469105596156654" />
+            <inertia ixx="2.8927942991819264068e-06" ixy="6.375298195262483249e-10" ixz="-1.2458808671193488844e-10" iyy="7.9629434849240517525e-07" iyz="5.5267826027688886096e-07" izz="2.9001914023676721556e-06" />
+        </inertial>
+    </link>
+
+
+    <gazebo reference="motor_bracket_2">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <link name="dc_motor_2">
+        <visual>
+            <origin xyz="0 0.0085000000000100047609 -9.9920072216264088638e-15" rpy="-3.141592653589793116 -0 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/dc_motor.stl"/>
+            </geometry>
+            <material name="dc_motor_material">
+                <color rgba="0.49803921568627451677 0.49803921568627451677 0.49803921568627451677 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0.0085000000000100047609 -9.9920072216264088638e-15" rpy="-3.141592653589793116 -0 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/dc_motor.stl"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="1.1702285396423122316e-05 0.0084346555184144876571 -0.027179996226653398844" rpy="0 0 0"/>
+            <mass value="0.096000000000000015876" />
+            <inertia ixx="3.1172642216988409689e-05" ixy="2.0079069750654133337e-08" ixz="3.14783788434006057e-08" iyy="3.1065300521791501672e-05" iyz="-1.8154048411485934033e-07" izz="7.041773449468090525e-06" />
+        </inertial>
+    </link>
+
+
+    <gazebo reference="dc_motor_2">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <link name="wheel_2">
+        <visual>
+            <origin xyz="0 0 -0.0025000000000000022204" rpy="-1.570796326794896558 -1.570796326794896558 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/wheel.stl"/>
+            </geometry>
+            <material name="wheel_material">
+                <color rgba="0.50196078431372548323 0.50196078431372548323 0.50196078431372548323 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 -0.0025000000000000022204" rpy="-1.570796326794896558 -1.570796326794896558 0" />
+            <geometry>
+                <mesh filename="${find quadruped_description}/quadruped/wheel.stl"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="7.9659079677550884038e-07 3.0513857657930534157e-08 -0.0025284034607947771488" rpy="0 0 0"/>
+            <mass value="0.014968548144000006286" />
+            <inertia ixx="8.6077439441117218819e-06" ixy="-2.3149305744539501693e-12" ixz="1.0674848956511458848e-11" iyy="8.6048259472699091337e-06" iyz="-1.1376260598377232569e-12" izz="1.7005905067567770369e-05" />
+        </inertial>
+    </link>
+
+
+    <gazebo reference="wheel_2">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <joint name="left_wheel" type="continuous">
+        <origin xyz="1.7347234759768070944e-18 0.0085000000000100047609 0.015000000000000013323" rpy="0 7.5763496406088622086e-35 -1.570796326794896558" />
+        <parent link="dc_motor_2" />
+        <child link="wheel_2" />
+        <axis xyz="0 0 1"/>
+        <limit effort="1" velocity="20" />
+        <joint_properties friction="0.0"/>
+    </joint>
+
+    <joint name="link_left_motor" type="fixed">
+        <origin xyz="-1.2143064331837649661e-17 0.0043499999999999927613 -0.023000000000000003081" rpy="1.570796326794896558 -3.4914813388431353274e-15 3.1415926535897895633" />
+        <parent link="motor_bracket_2" />
+        <child link="dc_motor_2" />
+        <axis xyz="0 0 1"/>
+        <limit effort="1" velocity="20" />
+        <joint_properties friction="0.0"/>
+    </joint>
+
+    <joint name="link_left_bracket" type="fixed">
+        <origin xyz="0.13352157428338257139 0.0083625971112572007604 -0.0022790888017852097003" rpy="3.141592653589793116 5.1885812976927455838e-73 1.570796326794896558" />
+        <parent link="base_link" />
+        <child link="motor_bracket_2" />
+        <axis xyz="0 0 1"/>
+        <limit effort="1" velocity="20" />
+        <joint_properties friction="0.0"/>
+    </joint>
+
+
+</robot>
