@@ -18,6 +18,7 @@ def generate_launch_description():
 
     pkg_path = os.path.join(get_package_share_directory(package_name))
     xacro_file = os.path.join(pkg_path,'quadruped','robot.urdf.xacro')
+    # xacro_file = os.path.join(pkg_path,'quadruped','robot.urdf')
 
     # robot_desc_path = os.path.join(get_package_share_directory(package_description), "quadruped", urdf_file)
     # robot_description_config = Command(['xacro ', xacro_file])

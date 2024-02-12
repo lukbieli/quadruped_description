@@ -1,6 +1,6 @@
 import os
 
-from ament_index_python.packages import get_package_share_directory
+from ament_index_python.packages import get_package_share_directory,get_package_prefix
 
 
 from launch import LaunchDescription
@@ -11,7 +11,6 @@ from launch.event_handlers import OnProcessExit
 from launch.actions import DeclareLaunchArgument
 
 from launch_ros.actions import Node
-
 
 
 def generate_launch_description():
@@ -29,6 +28,16 @@ def generate_launch_description():
     )
     
     gazebo_params_file = os.path.join(get_package_share_directory(package_name),'config','gazebo_params.yaml')
+
+    # Add this code snippet before launching Gazebo
+    # os.environ['GAZEBO_RESOURCE_PATH'] = os.path.join(get_package_share_directory(package_name), 'quadruped') + ":" + os.environ.get('GAZEBO_RESOURCE_PATH', '')
+
+
+    pkg_share_path = os.pathsep + os.path.join(get_package_prefix(package_name), 'share')
+    if 'GAZEBO_MODEL_PATH' in os.environ:
+        os.environ['GAZEBO_MODEL_PATH'] += pkg_share_path
+    else:
+        os.environ['GAZEBO_MODEL_PATH'] =  pkg_share_path
 
     # Include the Gazebo launch file, provided by the gazebo_ros package
     gazebo = IncludeLaunchDescription(
